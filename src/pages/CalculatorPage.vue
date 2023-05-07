@@ -54,18 +54,32 @@
             label="Yeast type"></q-select>
         </div>
       </div>
+      <div class="row q-pt-md q-pr-xl">
+        <div class="col col-12">
+          <q-select v-model="selectedPoolishType" :options="poolishTypes"
+            label="Poolish"></q-select>
+        </div>
+      </div>
       <div class="row q-pt-xl">
 
         <div class="row col-6">
           <div class="col col-12 text-h4 text-primary">
-            {{ flour.value.toFixed(0) }}g
+            {{ selectedPoolishType.value === 0 ? flour.value.toFixed(0) :
+              selectedPoolishType.value === 400 ? `${(flour.value -
+                400).toFixed(0)}g
+                        (${flour.value.toFixed(0)})` : `${(flour.value - 500).toFixed(0)}g
+                        (${flour.value.toFixed(0)})` }}g
           </div>
           <div class="col col-12 text-h6">Flour</div>
         </div>
 
         <div class="row col-6">
           <div class="col col-12 text-h4 text-primary">
-            {{ water.value.toFixed(0) }}g
+            {{ selectedPoolishType.value === 0 ? water.value.toFixed(0) :
+              selectedPoolishType.value === 400 ? `${(water.value -
+                400).toFixed(0)}g
+                        (${water.value.toFixed(0)})` : `${(water.value - 500).toFixed(0)}g
+                        (${water.value.toFixed(0)})` }}g
           </div>
           <div class="col col-12 text-h6">Water</div>
         </div>
@@ -145,6 +159,23 @@ const yeastTypes = ref([
   {
     label: 'Fresh yeast',
     value: 'Fresh'
+  }
+])
+
+const selectedPoolishType = ref({ label: 'No poolish', value: 0 });
+
+const poolishTypes = ref([
+  {
+    label: 'No poolish',
+    value: 0
+  },
+  {
+    label: 'Poolish(400g water, 400g flour)',
+    value: 400
+  },
+  {
+    label: 'Poolish(500g water, 500g flour)',
+    value: 500
   }
 ])
 
